@@ -1,10 +1,9 @@
 package handlers
 
 import (
-	"fmt"
 	"html/template"
-	"net/http"
 	"log"
+	"net/http"
 )
 
 const (
@@ -15,27 +14,26 @@ const (
 // para enviar datos a una plantilla en go necesitamos una estructura,mapas u otros
 // manejador
 func Index(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "index.html",nil)
+	RenderTemplate(w, "index.html", nil)
 }
 func NewGame(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Crear nuevo juego")
+	RenderTemplate(w, "new-game.html", nil)
 }
 func Game(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Juego")
+	RenderTemplate(w, "game.html", nil)
 }
-func Play(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Jugar")
+func Play(w http.ResponseWriter, r *http.Request){
+	RenderTemplate(w,"jugar.html",nil)
 }
 func About(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Acerca de...")
-
+	RenderTemplate(w, "about.html", nil)
 }
 func RenderTemplate(w http.ResponseWriter, page string, data any) {
 	tpl := template.Must(template.ParseFiles(templateBase, templateDir+page))
 	err := tpl.ExecuteTemplate(w, "base", data)
 	if err != nil {
 		http.Error(w, "Error al renderizar", http.StatusInternalServerError)
-log.Println(err)
+		log.Println(err)
 		return
 	}
 }

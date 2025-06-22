@@ -9,11 +9,15 @@ import (
 func main() {
 	//crear enrutador
 	router := http.NewServeMux()
+	//manejador de archivos estaticos desde una direccion
+	fs:=http.FileServer(http.Dir("static"))
+	//ruta para acceder a los archivos estaticos
+	router.Handle("/static/",http.StripPrefix("/static/",fs))
 	//configurar rutas
 	router.HandleFunc("/", r.Index)
-	router.HandleFunc("/new", r.NewGame)
+	router.HandleFunc("/new-game", r.NewGame)
 	router.HandleFunc("/game", r.Game)
-	router.HandleFunc("/play", r.Play)
+	router.HandleFunc("/jugar",r.Play)
 	router.HandleFunc("/about", r.About)
 
 	port := ":8080"

@@ -1,0 +1,19 @@
+header{
+    padding: 20px 0;
+    background-color: aqua;
+}
+header .logo a{
+    text-decoration: none;
+    color: darkgreen;
+    font-size: 20px;
+    font-weight: bold;
+}
+header nav a{
+    text-decoration: none;
+    font-weight: bold;
+    color: darkgreen;
+    margin-left: 10px;
+}
+header nav a:hover{
+    color: greenyellow;
+}
