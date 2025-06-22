@@ -4,22 +4,18 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"log"
 )
-//para enviar datos a una plantilla en go necesitamos una estructura,mapas u otros
+
+const (
+	templateDir  = "template/"
+	templateBase = templateDir + "base.html"
+)
+
+// para enviar datos a una plantilla en go necesitamos una estructura,mapas u otros
 // manejador
 func Index(w http.ResponseWriter, r *http.Request) {
-	tpl, err := template.ParseFiles("template/base.html","template/index.html")
-	if err != nil {
-		http.Error(w, "Error al analizar plantillas", 
-		http.StatusInternalServerError)
-		return
-	}
-
-	err = tpl.ExecuteTemplate(w, "base",nil)
-	if err != nil {
-		http.Error(w, "Error al renderizar", http.StatusInternalServerError)
-		return
-	}
+	RenderTemplate(w, "index.html",nil)
 }
 func NewGame(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Crear nuevo juego")
@@ -33,4 +29,13 @@ func Play(w http.ResponseWriter, r *http.Request) {
 func About(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Acerca de...")
 
+}
+func RenderTemplate(w http.ResponseWriter, page string, data any) {
+	tpl := template.Must(template.ParseFiles(templateBase, templateDir+page))
+	err := tpl.ExecuteTemplate(w, "base", data)
+	if err != nil {
+		http.Error(w, "Error al renderizar", http.StatusInternalServerError)
+log.Println(err)
+		return
+	}
 }
