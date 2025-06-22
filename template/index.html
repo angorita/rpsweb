@@ -1,6 +1,26 @@
 {{template "base".}}
 {{define "title"}}Piedra papel o tijera{{end}}
 {{define "content"}}
-<h1>Pagina Principal de Piedra papel o tijera</h1>
-<img src="/static/img/gabita.jpg" width="150" height="200">
+<!-- py-5 py-5: Esta es una clase de utilidad que aplica un "padding" (relleno interno) vertical. -->
+
+<!-- La p significa "padding".
+La y significa "eje Y" (es decir, arriba y abajo).
+El 5 indica el tamaño del padding. En Bootstrap y Tailwind, estos números corresponden a una escala predefinida de valores de espaciado. En Bootstrap 5, py-5 aplica un padding superior e inferior de $spacer * 3, donde $spacer es una variable de Sass (por defecto, 1rem o 16px). Esto significa que py-5 suele resultar en un padding vertical de 3rem o 48px. En Tailwind CSS, py-5 también establece padding-top: 1.25rem; y padding-bottom: 1.25rem;. -->
+<section class="container py-3">
+    <h1 class="display-4 fw-bold py-3 text-center">Bienvenido a Piedra Papel o Tijera</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="/static/img/gabita.jpg" class="img-fluid">
+        </div>
+        <div class="col-md-4">
+            <img src="/static/img/paper_icon.png" class="img-fluid">
+        </div>
+        <div class="col-md-4">
+            <img src="/static/img/scissors_icon.png" class="img-fluid">
+        </div>
+    </div>
+
+    <p class="lead texr-center fs-2 py-4">Juega contra la computadora</p>
+<a href="/new" class="btn btn-success btn-lg">Nuevo Juego</a>
+</section>
 {{end}}

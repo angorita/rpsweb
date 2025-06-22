@@ -5,7 +5,6 @@ import (
 	"net/http"
 	r "rpsweb/handlers"
 )
-
 func main() {
 	//crear enrutador
 	router := http.NewServeMux()
@@ -23,5 +22,4 @@ func main() {
 	port := ":8080"
 	log.Printf("Servidor escuchando en http://localhost%s\n", port)
 	log.Fatal(http.ListenAndServe(port, router))
-	
 }
