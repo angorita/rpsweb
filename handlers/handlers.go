@@ -5,14 +5,17 @@ import (
 	"html/template"
 	"net/http"
 )
-
+//para enviar datos a una plantilla en go necesitamos una estructura,mapas u otros
 // manejador
 func Index(w http.ResponseWriter, r *http.Request) {
-	tpl, err := template.ParseFiles("template/index.html")
+	tpl, err := template.ParseFiles("template/base.html","template/index.html")
 	if err != nil {
-		http.Error(w, "Error al analizar plantillas", http.StatusInternalServerError)
+		http.Error(w, "Error al analizar plantillas", 
+		http.StatusInternalServerError)
+		return
 	}
-	err = tpl.Execute(w, nil)
+
+	err = tpl.ExecuteTemplate(w, "base",nil)
 	if err != nil {
 		http.Error(w, "Error al renderizar", http.StatusInternalServerError)
 		return
